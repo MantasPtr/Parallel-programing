@@ -50,12 +50,15 @@ Calc time: 24.27
 --------------------------------------
 N size: 96000
 --------------------------------------
-^Cmakefile:26: recipe for target 'executeAll' failed
-make: *** [executeAll] Pertraukimas
-
-mape3071@linux3:~/gitProjects/parallel-programing/Lab1/code/parallel$ make
-g++ -fopenmp algorithm.cpp -o program 
-Thread count: 1
+Load time: 3.96
+Calc time: 96.21
+Load time: 4.01
+Calc time: 96.28
+Load time: 4.02
+Calc time: 98.62
+--------------------------------------
+########################################
+Thread count: 4
 ########################################
 N size: 24000
 --------------------------------------
