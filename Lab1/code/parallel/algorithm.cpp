@@ -3,6 +3,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <math.h>
+#include <sstream>
 
 double GetTime() {
    struct timeval laikas;
@@ -55,11 +56,21 @@ void performcalc(int N, int p, float* M, float* D) {
    }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+   int N = 24000;
+   if (argc > 1) {
+      int narg = atoi(argv[1]);
+      std::istringstream ss(argv[1]);
+      if (!(ss >> narg)) {
+         printf("Invalid argument: Invalid number %s\n", argv[1]);
+         return -1;
+      }
+      N = narg;
+   }
+
    srand(time(NULL));
-   //int N = 100000;
-   int N = 80000;
+
    int p = 102;
    float* M = new float[3*N];
    float* D = new float[N];
@@ -75,9 +86,7 @@ int main()
    
    performcalc(N, p, M, D);
    double t_calc = GetTime();
-
    printf("Load time: %.2f\n", t_load - t_start);
    printf("Calc time: %.2f\n", t_calc - t_load);
-
    //for (int i=0; i<N; i++)
 }
