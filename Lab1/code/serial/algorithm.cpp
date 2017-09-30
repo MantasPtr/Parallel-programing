@@ -86,8 +86,6 @@ int main(int argc, char *argv[])
    
    performcalc(N, p, M, D);
    double t_calc = GetTime();
-   printf("-------------------------------\n");
-   printf("N size: %d\n", N);
    printf("Load time: %.2f\n", t_load - t_start);
    printf("Calc time: %.2f\n", t_calc - t_load);
    //for (int i=0; i<N; i++)
