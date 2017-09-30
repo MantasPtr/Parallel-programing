@@ -1,4 +1,9 @@
-g++ algoritm.cpp -o program
-./program
-./program
-./program
+default: compile execute
+
+compile:
+	g++ algorithm.cpp -o program #
+
+execute: program
+	./program #
+	./program #
+	./program #
