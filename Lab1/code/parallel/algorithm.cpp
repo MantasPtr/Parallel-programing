@@ -42,17 +42,24 @@ void loadfile(int N, int p, float* M) {
 }
 
 void performcalc(int N, int p, float* M, float* D) {
-   float min, d;
-   for (int i=0; i<N; i++) {
-      min = 1e10;
-      for (int j=0; j<N; j++) {
-         if (j != i) {
-            d = (M[2*i]-M[2*j]) + (M[2*i+1]-M[2*j+1]);
-            if (d < min) {
-               min = d;
+
+   #pragma omp parallel 
+   {
+      int threadCount = omp_get_num_threads();
+      int threadId = omp_get_thread_num();
+      int chunk = N/threadCount;
+      float min, d;
+      for (int i=threadId*chunk; i<(threadId+1)*chunk; i++) {
+         min = 1e10;
+         for (int j=0; j<N; j++) {
+            if (j != i) {
+               d = (M[2*i]-M[2*j]) + (M[2*i+1]-M[2*j+1]);
+               if (d < min) {
+                  min = d;
+               }
             }
+            D[i] = min;
          }
-         D[i] = min;
       }
    }
 }
@@ -83,8 +90,7 @@ int main(int argc, char *argv[])
       }
       threads = threadarg;
    }
-
-
+   omp_set_num_threads(threads);
    srand(time(NULL));
 
    int p = 102;

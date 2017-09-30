@@ -5,7 +5,7 @@ echoN:
 	echo $(nsize)
 
 compile:
-	g++ algorithm.cpp -o program #
+	g++ -fopenmp algorithm.cpp -o program #
 
 execute: program
 	./program  #
