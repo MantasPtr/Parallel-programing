@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 {
    int N = 24000;
    if (argc > 1) {
-      int narg = atoi(argv[1]);
+      int narg;
       std::istringstream ss(argv[1]);
       if (!(ss >> narg)) {
          printf("Invalid argument: Invalid number %s\n", argv[1]);

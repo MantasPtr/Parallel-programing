@@ -4,6 +4,7 @@
 #include <sys/time.h>
 #include <math.h>
 #include <sstream>
+#include <omp.h>
 
 double GetTime() {
    struct timeval laikas;
@@ -59,8 +60,10 @@ void performcalc(int N, int p, float* M, float* D) {
 int main(int argc, char *argv[])
 {
    int N = 24000;
+   
    if (argc > 1) {
-      int narg = atoi(argv[1]);
+      // N value;
+      int narg;
       std::istringstream ss(argv[1]);
       if (!(ss >> narg)) {
          printf("Invalid argument: Invalid number %s\n", argv[1]);
@@ -68,6 +71,19 @@ int main(int argc, char *argv[])
       }
       N = narg;
    }
+
+   int threads = 2;
+   if (argc > 2) {
+      // thread count value;
+      int threadarg;
+      std::istringstream ss(argv[2]);
+      if (!(ss >> threadarg)) {
+         printf("Invalid argument: Invalid number %s\n", argv[2]);
+         return -1;
+      }
+      threads = threadarg;
+   }
+
 
    srand(time(NULL));
 
