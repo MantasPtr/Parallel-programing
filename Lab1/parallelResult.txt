@@ -1,0 +1,171 @@
+Thread count: 1
+########################################
+N size: 24000
+--------------------------------------
+Load time: 1.00
+Calc time: 12.18
+Load time: 0.99
+Calc time: 12.12
+Load time: 0.99
+Calc time: 12.12
+--------------------------------------
+N size: 48000
+--------------------------------------
+Load time: 1.98
+Calc time: 48.71
+Load time: 1.98
+Calc time: 48.71
+Load time: 2.00
+Calc time: 48.49
+--------------------------------------
+N size: 96000
+--------------------------------------
+Load time: 3.96
+Calc time: 192.33
+Load time: 4.01
+Calc time: 192.00
+Load time: 3.99
+Calc time: 191.94
+--------------------------------------
+########################################
+Thread count: 2
+########################################
+N size: 24000
+--------------------------------------
+Load time: 0.99
+Calc time: 6.07
+Load time: 0.99
+Calc time: 6.00
+Load time: 0.99
+Calc time: 6.00
+--------------------------------------
+N size: 48000
+--------------------------------------
+Load time: 1.98
+Calc time: 24.27
+Load time: 2.00
+Calc time: 24.01
+Load time: 1.97
+Calc time: 24.27
+--------------------------------------
+N size: 96000
+--------------------------------------
+^Cmakefile:26: recipe for target 'executeAll' failed
+make: *** [executeAll] Pertraukimas
+
+mape3071@linux3:~/gitProjects/parallel-programing/Lab1/code/parallel$ make
+g++ -fopenmp algorithm.cpp -o program 
+Thread count: 1
+########################################
+N size: 24000
+--------------------------------------
+Load time: 0.99
+Calc time: 12.18
+Load time: 1.00
+Calc time: 12.00
+Load time: 0.98
+Calc time: 12.12
+--------------------------------------
+N size: 48000
+--------------------------------------
+Load time: 1.99
+Calc time: 47.98
+Load time: 1.99
+Calc time: 47.98
+Load time: 1.98
+Calc time: 48.70
+--------------------------------------
+N size: 96000
+--------------------------------------
+Load time: 3.92
+Calc time: 194.29
+Load time: 3.98
+Calc time: 192.32
+Load time: 3.97
+Calc time: 192.58
+--------------------------------------
+########################################
+Thread count: 2
+########################################
+N size: 24000
+--------------------------------------
+Load time: 1.00
+Calc time: 6.07
+Load time: 0.99
+Calc time: 6.00
+Load time: 1.01
+Calc time: 6.09
+Load time: 0.99
+Calc time: 6.09
+Load time: 0.99
+Calc time: 6.09
+--------------------------------------
+N size: 48000
+--------------------------------------
+Load time: 1.98
+Calc time: 24.01
+Load time: 1.96
+Calc time: 24.26
+Load time: 1.99
+Calc time: 24.26
+--------------------------------------
+N size: 96000
+--------------------------------------
+Load time: 3.96
+Calc time: 96.21
+Load time: 4.01
+Calc time: 96.28
+Load time: 4.02
+Calc time: 98.62
+
+--------------------------------------
+########################################
+Thread count: 4
+########################################
+N size: 24000
+--------------------------------------
+Load time: 0.99
+Calc time: 3.99
+Load time: 1.01
+Calc time: 3.91
+Load time: 0.99
+Calc time: 3.50
+Load time: 0.97
+Calc time: 3.01
+Load time: 0.99
+Calc time: 3.09
+Load time: 0.99
+Calc time: 3.04
+--------------------------------------
+N size: 48000
+--------------------------------------
+Load time: 2.02
+Calc time: 13.38
+Load time: 2.00
+Calc time: 16.92
+Load time: 1.99
+Calc time: 12.59
+Load time: 2.00
+Calc time: 12.13
+Load time: 1.99
+Calc time: 12.44
+Load time: 1.98
+Calc time: 12.11
+--------------------------------------
+N size: 96000
+--------------------------------------
+Load time: 3.98
+Calc time: 54.55
+Load time: 4.01
+Calc time: 69.12
+Load time: 4.01
+Calc time: 50.87
+Load time: 4.02
+Calc time: 50.17
+Load time: 3.97
+Calc time: 50.11
+Load time: 3.97
+Calc time: 49.38
+--------------------------------------
+########################################
+
