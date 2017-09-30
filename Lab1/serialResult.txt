@@ -1,0 +1,25 @@
+N size: 24000
+Load time: 0.98
+Calc time: 10.74
+Load time: 0.98
+Calc time: 10.74
+Load time: 0.95
+Calc time: 10.74
+-------------------------------------
+N size: 48000
+Load time: 1.91
+Calc time: 42.95
+Load time: 1.91
+Calc time: 42.96
+Load time: 1.95
+Calc time: 42.95
+-------------------------------------
+N size: 96000
+Load time: 3.82
+Calc time: 171.86
+Load time: 3.82
+Calc time: 172.18
+Load time: 3.82
+Calc time: 172.19
+-------------------------------------
+
