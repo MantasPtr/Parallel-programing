@@ -10,6 +10,11 @@
 1. Open cmd
 2. Type make
 ```
+or alternatively
+
+1. Open cmd
+2. Type ```g++ -fopenmp threadCount.cpp -o counter``` to compile
+3  Type ```./counter``` to run
 
 ### Result:
 
