@@ -19,7 +19,6 @@ or alternatively
 ### Result:
 
 Program will output this to your console:
-
 ```thread count = N```,
 where N is thread count on your system.
 
