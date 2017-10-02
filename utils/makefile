@@ -1,3 +1,3 @@
 execute:
-	g++ -fopenmp threadCount.cpp -o counter
-	./counter 
+	@g++ -fopenmp threadCount.cpp -o counter
+	@./counter 
