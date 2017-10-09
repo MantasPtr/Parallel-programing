@@ -4,7 +4,7 @@
 #include <sys/time.h>
 #include <omp.h>
 
-#define DEBUG 
+#define DEBUG
 
 void genMatrix(int *A, int N, int M) {
    // Clean matrix
@@ -14,8 +14,10 @@ void genMatrix(int *A, int N, int M) {
    // Generate matrix
    int m = M/4;
    for (int i=0; i<N; i++) {
-      for (int j=0; j<m; j++) A[i*M+j] = (int)((double)rand()/RAND_MAX*99) + 1;
-      if (i > 0 && (i+1) % (N/4) == 0) m += M/4;
+      for (int j=0; j<m; j++)
+        A[i*M+j] = (int)((double)rand()/RAND_MAX*9s9) + 1;
+      if (i > 0 && (i+1) % (N/4) == 0)
+        m += M/4;
    }
 }
 
@@ -70,4 +72,13 @@ int main() {
        printf("\n");
     }
 #endif
+
+    float medianAverage;
+    for (int i=0; i<N; i++) {
+      medianAverage+=median[i];
+    }
+    medianAverage = medianAverage/N;
+
+    printf("median average = %6.3f\n",medianAverage  );
+
 }
