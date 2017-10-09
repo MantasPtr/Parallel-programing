@@ -15,7 +15,7 @@ void genMatrix(int *A, int N, int M) {
    int m = M/4;
    for (int i=0; i<N; i++) {
       for (int j=0; j<m; j++)
-        A[i*M+j] = (int)((double)rand()/RAND_MAX*9s9) + 1;
+        A[i*M+j] = (int)((double)rand()/RAND_MAX*99) + 1;
       if (i > 0 && (i+1) % (N/4) == 0)
         m += M/4;
    }
@@ -49,7 +49,7 @@ int main() {
           if (A[rowNo*M+j] > A[rowNo*M+j+1]) {
             t = A[rowNo*M+j];
             A[rowNo*M+j] = A[rowNo*M+j+1];
-            A[rowNo*M+j+1] = A[rowNo*M+j];
+            A[rowNo*M+j+1] = t;
           }
         }
       }
