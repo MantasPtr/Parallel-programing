@@ -4,7 +4,14 @@
 #include <sys/time.h>
 #include <omp.h>
 
-#define DEBUG
+//#define DEBUG
+
+double GetTime() {
+   struct timeval laikas;
+   gettimeofday(&laikas, NULL);
+   double rez = (double)laikas.tv_sec+(double)laikas.tv_usec/1000000;
+   return rez;
+}
 
 void genMatrix(int *A, int N, int M) {
    // Clean matrix
@@ -25,21 +32,28 @@ void genMatrix(int *A, int N, int M) {
 
 int main() {
   srand(time(NULL));
-  int N = 16; // eilučių skaičius
-  int M = 28; // stulpelių skaičius
+  int N = 256; // eilučių skaičius
+  int M = 2000; // stulpelių skaičius
   int *A = new int[N*M];
   float *median = new float[N];
 
   int t, n;
   genMatrix(A, N, M);
 
-  int threadCount = 4;
+  int threadCount = 2;
   omp_set_num_threads(threadCount);
 
-  #pragma omp parallel private(n, t)
-  {
-  int threadId = omp_get_thread_num();
-  for (int rowNo = threadId; rowNo<N; rowNo+=threadCount) {
+  double t_start = GetTime();
+  float medianAverage = 0;
+
+  //#pragma omp parallel for schedule(static) private(n, t) //2.86
+  //#pragma omp parallel for schedule(static, N/(4*threadCount)) private(n, t) //1.56
+  //#pragma omp parallel for schedule(dynamic) private(n, t) //1.72
+  //#pragma omp parallel for schedule(guided) private(n, t) //1.68
+  //#pragma omp parallel for schedule(guided, N/(4*threadCount) private(n, t) //1.69
+  #pragma omp parallel for schedule(auto) private(n, t) reduction(+:medianAverage) //2.88
+
+  for (int rowNo = 0; rowNo<N; rowNo++) {
       n = 0;
       while (A[rowNo*M+n] != 0 && n < M) {
         n++;
@@ -59,9 +73,9 @@ int main() {
       } else {
           currentMedian = ((float)(A[rowNo*M+(n/2)]+A[rowNo*M+(n/2)-1])/2);
       }
-      median[rowNo]=(currentMedian);
+      medianAverage+=currentMedian;
     }
-  }
+    double t_end = GetTime();
 #ifdef DEBUG
 // Print matrix
    for (int i=0; i<N; i++) {
@@ -72,11 +86,7 @@ int main() {
        printf("\n");
     }
 #endif
-
-    float medianAverage = 0;
-    for (int i=0; i<N; i++) {
-      medianAverage+=median[i];
-    }
+    printf("calculation time: %.2f\n", t_end - t_start);
     medianAverage = medianAverage/N;
 
     printf("median average = %6.3f\n", medianAverage);
