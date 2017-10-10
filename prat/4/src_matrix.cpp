@@ -14,8 +14,9 @@ void genMatrix(int *A, int N, int M) {
    // Generate matrix
    int m = M/4;
    for (int i=0; i<N; i++) {
-      for (int j=0; j<m; j++)
+      for (int j=0; j<m; j++) {
         A[i*M+j] = (int)((double)rand()/RAND_MAX*99) + 1;
+      }
       if (i > 0 && (i+1) % (N/4) == 0)
         m += M/4;
    }
@@ -25,7 +26,7 @@ void genMatrix(int *A, int N, int M) {
 int main() {
   srand(time(NULL));
   int N = 16; // eilučių skaičius
-  int M = 20; // stulpelių skaičius
+  int M = 28; // stulpelių skaičius
   int *A = new int[N*M];
   float *median = new float[N];
 
@@ -35,8 +36,7 @@ int main() {
   int threadCount = 4;
   omp_set_num_threads(threadCount);
 
-
-  #pragma omp parallel
+  #pragma omp parallel private(n, t)
   {
   int threadId = omp_get_thread_num();
   for (int rowNo = threadId; rowNo<N; rowNo+=threadCount) {
@@ -46,6 +46,7 @@ int main() {
       }
       for (int i=0; i<n-1; i++) {
         for (int j=0; j<n-1; j++) {
+          //printf("%d %d\n", rowNo, i);
           if (A[rowNo*M+j] > A[rowNo*M+j+1]) {
             t = A[rowNo*M+j];
             A[rowNo*M+j] = A[rowNo*M+j+1];
@@ -57,9 +58,9 @@ int main() {
       if(n%2==1){
           currentMedian = (float) A[rowNo*M+(n/2)];
       } else {
-          currentMedian = ((float)(A[rowNo*M+(n/2)]+A[rowNo*M+(n/2)])/2);
+          currentMedian = ((float)(A[rowNo*M+(n/2)]+A[rowNo*M+(n/2)-1])/2);
       }
-      median[rowNo]=(A[rowNo*M+(n/2)]);
+      median[rowNo]=(currentMedian);
     }
   }
 #ifdef DEBUG
@@ -79,6 +80,6 @@ int main() {
     }
     medianAverage = medianAverage/N;
 
-    printf("median average = %6.3f\n",medianAverage  );
+    printf("median average = %6.3f\n", medianAverage);
 
 }
