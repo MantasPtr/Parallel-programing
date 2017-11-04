@@ -16,9 +16,11 @@ double GetTime() {
 int calculatePi (int outerLoop, int innerLoop) {
     int inCircle = 0;
     int total = 0;
-    for (int fr1 = 0; fr1 < outerLoop; fr1++) {
+    int fr1;
+    for (fr1 = 0; fr1 < outerLoop; fr1++) {
         #pragma omp parallel for //reduction(+:total)
-        for (int fr2 = 0; fr2 < innerLoop; fr2++) {
+        int fr2;
+        for (fr2 = 0; fr2 < innerLoop; fr2++) {
             double x = randF;
             double y = randF;
             if (sqr(x) + sqr(y) < 1) {
