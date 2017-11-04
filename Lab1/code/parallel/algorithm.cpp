@@ -83,9 +83,9 @@ int main(int argc, char *argv[])
    if (argc > 2) {
       // thread count value;
       int threadarg;
-      std::istringstream ss(argv[2]);
+      std::istringstream ss(argv[1]);
       if (!(ss >> threadarg)) {
-         printf("Invalid argument: Invalid number %s\n", argv[2]);
+         printf("Invalid argument: Invalid number %s\n", argv[1]);
          return -1;
       }
       threads = threadarg;
