@@ -1,0 +1,3 @@
+make:
+	g++ -fopenmp main.cpp -o main
+	./main
