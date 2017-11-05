@@ -6,12 +6,9 @@
 #include <math.h>
 #include <sstream>
 
-#define sqr(x) (x*x)
-#define randF (double)rand()/RAND_MAX
-
-double getRandomDouble(unsigned int *seed) {
+/*double getRandomDouble(unsigned int *seed) {
     return (double)rand_r(seed)/RAND_MAX;
-}
+}*/
 
 double getRandomDoubleWithoutSeed() {
     return (double)rand()/RAND_MAX;
@@ -31,10 +28,16 @@ int calculatePi (int outerLoop, int innerLoop) {
     {
         unsigned int seed = (unsigned int) omp_get_thread_num();
         for (int fr1 = 0; fr1 < outerLoop; fr1++) {
-            #pragma omp for reduction (+:inCircle, total)
+            #pragma omp parallel for //schedule(dynamic) //reduction (+:inCircle, total)
             for (int fr2 = 0; fr2 < innerLoop; fr2++) {
-                double x = getRandomDouble(&seed);
-                double y = getRandomDouble(&seed);         
+                //double str = GetTime();
+                //double x = getRandomDouble(&seed);
+                //double y = getRandomDouble(&seed);         
+                double x = getRandomDoubleWithoutSeed();
+                //printf("%d \n",fr2);
+                double y = getRandomDoubleWithoutSeed();         
+                //double fin = GetTime();
+               // printf("%.9f\n", fin-str);
                 if (pow(x,2) + pow(y,2) < 1) {
                         inCircle++;
                 }

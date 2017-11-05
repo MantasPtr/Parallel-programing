@@ -6,12 +6,9 @@
 #include <math.h>
 #include <sstream>
 
-#define sqr(x) (x*x)
-#define randF (double)rand()/RAND_MAX
-
-double getRandomDouble(unsigned int *seed) {
+/*double getRandomDouble(unsigned int *seed) {
     return (double)rand_r(seed)/RAND_MAX;
-}
+}*/
 
 double getRandomDoubleWithoutSeed() {
     return (double)rand()/RAND_MAX;
