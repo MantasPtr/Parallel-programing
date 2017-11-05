@@ -1,4 +1,4 @@
-*
-!*/
-!makefile
-!*.*
+*.o
+gen
+program
+main

@@ -1,23 +1,32 @@
 threadCount = 1 2 4
 
 default: 
-	@echo serial commands: doSerial, compileS, executeS,
+	@echo serial with rand\(\) commands: doSerialRand, compileSR, executeSR,
 	@echo parallel with rand\(\) commands: doParallelRand, compilePR, executePR
-	@echo parallel witj rand_r\(\) commands: doParallelRandR, compilePRR, executePRR prrAll, executePRRAll
-
+	@echo serial with rand_r\(\) commands: doSerialRandR, compileSRR, executeSRR,
+	@echo parallel with rand_r\(\) commands: doParallelRandR, compilePRR, executePRR prrAll, executePRRAll
+	
 #status commands
 echoThreads:
 	@echo Thread count = $(threadCount)
 
 #program execution
 
-doSerial: compileS executeS
+doSerialRand: compileSR executeSR
 
-compileS:
-	@g++ serial.cpp -o serial.o 
+compileSR:
+	@g++ serialRand.cpp -o sr.o 
 
-executeS: 
-	@./serial.o
+executeSR: 
+	@./sr.o
+
+doSerialRandR: compileSRR executeSRR
+
+compileSRR:
+	@g++ serialRandR.cpp -o srr.o
+
+executeSRR: 
+	@./srr.o
 
 doParallelRand: compilePR executePR
 
@@ -34,7 +43,6 @@ compilePRR:
 
 executePRR: 
 	@./prr.o\
-
 
 prrAll: compilePRR executePRRAll 
 
