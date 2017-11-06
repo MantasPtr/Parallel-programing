@@ -12,6 +12,8 @@ echoThreads:
 
 #program execution
 
+doAll: doSerialRand doParallelRand doSerialRandR doParallelRandR
+
 doSerialRand: compileSR executeSR
 
 compileSR:
