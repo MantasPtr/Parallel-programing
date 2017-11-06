@@ -8,10 +8,6 @@ double getRandomDouble(unsigned int *seed) {
     return (double)rand_r(seed)/RAND_MAX;
 }
 
-/*double getRandomDoubleWithoutSeed() {
-    return (double)rand()/RAND_MAX;
-}*/
-
 double GetTime() {
     struct timeval laikas;
     gettimeofday(&laikas, NULL);
@@ -19,10 +15,10 @@ double GetTime() {
     return rez;
  }
 
-int calculatePi (int outerLoop, int innerLoop) {
+int calculatePi (int outerLoop, int innerLoop, int seedRandom) {
     int inCircle = 0;
     int total = 0;
-    unsigned int seed = 1;
+    unsigned int seed = seedRandom;
     for (int fr1 = 0; fr1 < outerLoop; fr1++) {
         for (int fr2 = 0; fr2 < innerLoop; fr2++) {
             double x = getRandomDouble(&seed);
@@ -36,9 +32,10 @@ int calculatePi (int outerLoop, int innerLoop) {
     }
 }
 int main(int argc, char *argv[]){
-    srand(time(NULL));
+    struct timeval laikas;
+    gettimeofday(&laikas, NULL); 
     double startTime = GetTime();
-    calculatePi(10, 20000000);
+    calculatePi(10, 20000000, (int) laikas.tv_usec);
     double endTime = GetTime();
     printf("time: %.3f\n", endTime - startTime);
 }

@@ -10,10 +10,6 @@ double getRandomDouble(unsigned int *seed) {
     return (double)rand_r(seed)/RAND_MAX;
 }
 
-/*double getRandomDoubleWithoutSeed() {
-    return (double)rand()/RAND_MAX;
-}*/
-    
 double GetTime() {
     struct timeval laikas;
     gettimeofday(&laikas, NULL);
@@ -21,12 +17,12 @@ double GetTime() {
     return rez;
  }
 
-int calculatePi (int outerLoop, int innerLoop) {
+int calculatePi (int outerLoop, int innerLoop, int seedRandom) {
     int inCircle = 0;
     int total = 0;
-    #pragma omp parallel 
+    #pragma omp parallel
     {
-        unsigned int seed = (unsigned int) omp_get_thread_num();
+        unsigned int seed = (unsigned int) omp_get_thread_num() * seedRandom;
         for (int fr1 = 0; fr1 < outerLoop; fr1++) {
             #pragma omp for reduction (+:inCircle, total)
             for (int fr2 = 0; fr2 < innerLoop; fr2++) {
@@ -55,9 +51,10 @@ int main(int argc, char *argv[]){
        }
        omp_set_num_threads(threadarg);       
     }
-    srand(time(NULL));
+    struct timeval laikas;
+    gettimeofday(&laikas, NULL);
     double startTime = GetTime();
-    calculatePi(10, 20000000);
+    calculatePi(10, 20000000, (int) laikas.tv_usec);
     double endTime = GetTime();
     printf("time: %.3f\n", endTime - startTime);
 }
