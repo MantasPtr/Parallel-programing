@@ -18,11 +18,10 @@ double GetTime() {
 int calculatePi (int outerLoop, int innerLoop, int seedRandom) {
     int inCircle = 0;
     int total = 0;
-    unsigned int seed = seedRandom;
     for (int fr1 = 0; fr1 < outerLoop; fr1++) {
         for (int fr2 = 0; fr2 < innerLoop; fr2++) {
-            double x = getRandomDouble(&seed);
-            double y = getRandomDouble(&seed);         
+            double x = getRandomDouble(&seedRandom);
+            double y = getRandomDouble(&seedRandom);         
                 if (pow(x,2) + pow(y,2) < 1) {
                         inCircle++;
                 }

@@ -15,7 +15,7 @@ echoThreads:
 doSerialRand: compileSR executeSR
 
 compileSR:
-	@g++ serialRand.cpp -o sr.o 
+	g++ serialRand.cpp -o sr.o 
 
 executeSR: 
 	@./sr.o
@@ -23,7 +23,7 @@ executeSR:
 doSerialRandR: compileSRR executeSRR
 
 compileSRR:
-	@g++ serialRandR.cpp -o srr.o
+	g++ serialRandR.cpp -o srr.o
 
 executeSRR: 
 	@./srr.o
@@ -31,7 +31,7 @@ executeSRR:
 doParallelRand: compilePR executePR
 
 compilePR:
-	@g++ -fopenmp parallelRand.cpp -o pr.o
+	g++ -fopenmp parallelRand.cpp -o pr.o
 
 executePR: 
 	@./pr.o\
@@ -39,7 +39,7 @@ executePR:
 doParallelRandR: compilePRR executePRR
 
 compilePRR:
-	@g++ -fopenmp parallelRandR.cpp -o prr.o\
+	g++ -fopenmp parallelRandR.cpp -o prr.o\
 
 executePRR: 
 	@./prr.o\
