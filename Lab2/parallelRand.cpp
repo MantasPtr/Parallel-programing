@@ -13,15 +13,14 @@ double getRandomDoubleWithoutSeed() {
 double GetTime() {
     struct timeval laikas;
     gettimeofday(&laikas, NULL);
-    double rez = (double)laikas.tv_sec+(double)laikas.tv_usec/1000000;
-    return rez;
+    return (double)laikas.tv_sec+(double)laikas.tv_usec/1000000;
  }
 
 int calculatePi (int outerLoop, int innerLoop) {
     int inCircle = 0;
     int total = 0;
     for (int fr1 = 0; fr1 < outerLoop; fr1++) {
-        #pragma omp for reduction (+:inCircle, total)
+        #pragma omp parallel for reduction (+:inCircle, total)
         for (int fr2 = 0; fr2 < innerLoop; fr2++) {        
             double x = getRandomDoubleWithoutSeed();
             double y = getRandomDoubleWithoutSeed();         

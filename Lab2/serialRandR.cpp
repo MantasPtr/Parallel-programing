@@ -11,17 +11,17 @@ double getRandomDouble(unsigned int *seed) {
 double GetTime() {
     struct timeval laikas;
     gettimeofday(&laikas, NULL);
-    double rez = (double)laikas.tv_sec+(double)laikas.tv_usec/1000000;
-    return rez;
+    return (double)laikas.tv_sec+(double)laikas.tv_usec/1000000;
  }
 
 int calculatePi (int outerLoop, int innerLoop, int seedRandom) {
     int inCircle = 0;
     int total = 0;
+    unsigned int seed = (unsigned int) seedRandom;
     for (int fr1 = 0; fr1 < outerLoop; fr1++) {
         for (int fr2 = 0; fr2 < innerLoop; fr2++) {
-            double x = getRandomDouble(&seedRandom);
-            double y = getRandomDouble(&seedRandom);         
+            double x = getRandomDouble(&seed);
+            double y = getRandomDouble(&seed);         
                 if (pow(x,2) + pow(y,2) < 1) {
                         inCircle++;
                 }

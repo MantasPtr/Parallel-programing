@@ -39,7 +39,7 @@ executePR:
 doParallelRandR: compilePRR executePRR
 
 compilePRR:
-	g++ -fopenmp parallelRandR.cpp -o prr.o\
+	g++ -fopenmp parallelRandR.cpp -o prr.o
 
 executePRR: 
 	@./prr.o\

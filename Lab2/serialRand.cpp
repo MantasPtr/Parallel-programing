@@ -11,8 +11,7 @@ double getRandomDoubleWithoutSeed() {
 double GetTime() {
     struct timeval laikas;
     gettimeofday(&laikas, NULL);
-    double rez = (double)laikas.tv_sec+(double)laikas.tv_usec/1000000;
-    return rez;
+    return (double)laikas.tv_sec+(double)laikas.tv_usec/1000000;
  }
 
 int calculatePi (int outerLoop, int innerLoop) {
