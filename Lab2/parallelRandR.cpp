@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
     struct timeval laikas;
     gettimeofday(&laikas, NULL);
     double startTime = GetTime();
-    calculatePi(10, 20000000, laikas.tv_usec);
+    calculatePi(10, 20000000, (int) laikas.tv_usec);
     double endTime = GetTime();
     printf("time: %.3f\n", endTime - startTime);
 }
