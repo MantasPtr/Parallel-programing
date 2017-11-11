@@ -21,7 +21,7 @@ int calculatePi (int outerLoop, int innerLoop, unsigned int seedRandom) {
     int total = 0;
     #pragma omp parallel
     {
-        unsigned int seed = (unsigned int) omp_get_thread_num() * seedRandom;
+        unsigned int seed = (unsigned int) (omp_get_thread_num() + 1) * seedRandom;
         for (int fr1 = 0; fr1 < outerLoop; fr1++) {
             #pragma omp for reduction (+:inCircle, total)
             for (int fr2 = 0; fr2 < innerLoop; fr2++) {
