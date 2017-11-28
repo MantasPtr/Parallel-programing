@@ -29,7 +29,7 @@ int main() {
     int M = 20;
     int *A = new int[N * M];
     int t, n;
-    double median[N];
+    double median[N];// = new double[N];
     // double *median = new double[N];
     genMatrix(A, N, M);
     for (int rowNo = 0; rowNo < N; rowNo++) {
@@ -54,11 +54,11 @@ int main() {
     }
 
 // Print matrix
-for (int i = 0; i < N; i++) {
-    printf("median = %3.3f", median[i]);
-    for (int j = 0; j < M; j++) {
-        printf("%3d", A[i * M + j]);
+    for (int i = 0; i < N; i++) {
+        printf("median = %3.3f", median[i]);
+        for (int j = 0; j < M; j++) {
+            printf("%3d", A[i * M + j]);
+        }
+        printf("\n");
     }
-    printf("\n");
-}
 }

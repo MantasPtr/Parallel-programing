@@ -24,49 +24,63 @@ void genMatrix(int *A, int N, int M) {
 }
 
 int main(int argc, char* argv[]) {
-    int rank, procCount; 
-    int N = 16;_
+    int id, procCount; 
+    int N = 16;
     int M = 20;
     int *A = new int[N * M];
-    int *workMatrix = new int[N*M/procCount];
     int t, n;
-    double median[N];
+    double *median = new double[N];
     MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_rank(MPI_COMM_WORLD, &id);
     MPI_Comm_size(MPI_COMM_WORLD, &procCount);
-    if (rank == 0) {
+    int *workMatrix = new int[N*M/procCount];
+    if (id == 0) {
         srand(time(NULL));
         genMatrix(A, N, M);
     }
-    MPI_Scatter(A, N*M/4, MPI_INT, workMatrix, N*M/4/procCount, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(A           ,N*M/4/procCount, MPI_INT, workMatrix                  , N*M/4/procCount, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(A+N*M/4     ,N*M/4/procCount, MPI_INT, workMatrix+N*M/4/procCount  , N*M/4/procCount, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(A+N*M/4*2   ,N*M/4/procCount, MPI_INT, workMatrix+N*M/4/procCount*2, N*M/4/procCount, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(A+N*M/4*3   ,N*M/4/procCount, MPI_INT, workMatrix+N*M/4/procCount*3, N*M/4/procCount, MPI_INT, 0, MPI_COMM_WORLD);
     
-/*    for (int rowNo = 0; rowNo < N; rowNo++) {
+
+    for (int rowNo = 0; rowNo < N/procCount; rowNo++) {
         n = 0;
-        while (A[rowNo * M + n] != 0 && n < M) {
+        while (workMatrix[rowNo * M + n] != 0 && n < M) {
             n++;
         }
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - 1; j++) {
-                if (A[rowNo * M + j] > A[rowNo * M + j + 1]) {
-                    t = A[rowNo * M + j];
-                    A[rowNo * M + j] = A[rowNo * M + j + 1];
-                    A[rowNo * M + j + 1] = t;
+                if (workMatrix[rowNo * M + j] > workMatrix[rowNo * M + j + 1]) {
+                    t = workMatrix[rowNo * M + j];
+                    workMatrix[rowNo * M + j] = workMatrix[rowNo * M + j + 1];
+                    workMatrix[rowNo * M + j + 1] = t;
                 }
             }
         }
         if (n % 2 == 1) {
-            median[rowNo] = (double)A[rowNo * M + (n / 2)];
+            median[rowNo] = (double)workMatrix[rowNo * M + (n / 2)];
         } else {
-            median[rowNo] = (double(A[rowNo * M + (n / 2)] + A[rowNo * M + (n / 2) - 1]) / 2);
+            median[rowNo] = (double(workMatrix[rowNo * M + (n / 2)] + workMatrix[rowNo * M + (n / 2) - 1]) / 2);
         }
     }
-*/
+
+
+
 // Print matrix
-for (int i = 0; i < N/4/procCount; i++) {
-    //printf("median = %3.3f", median[i]);
-    for (int j = 0; j < M; j++) {
-        printf("%3d", workMatrix[i * M + j]);
+for (int j=0; j< procCount;j++) {
+    if (id == j) {
+        printf("id= %d\n",id);
+        for (int i = 0; i < N/procCount; i++) {
+            printf("median = %3.3f", median[i]);
+            for (int j = 0; j < M; j++) {
+                printf("%3d", workMatrix[i * M + j]);
+            }
+            printf("\n");
+        }
     }
-    printf("\n");
+    MPI_Barrier(MPI_COMM_WORLD);
 }
+    MPI_Finalize();
+
 }
