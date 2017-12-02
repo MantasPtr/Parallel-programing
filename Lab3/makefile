@@ -1,3 +1,5 @@
+defautl: compile run
+
 compile:
 	mpic++ src.cpp -o src
 run:
