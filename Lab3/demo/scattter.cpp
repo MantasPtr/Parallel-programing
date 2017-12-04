@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         MPI_Barrier(MPI_COMM_WORLD);
     }
     
-    MPI_Scatter(A, 2, MPI_INT, A, N, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(A, 2, MPI_INT, A, 16, MPI_INT, 0, MPI_COMM_WORLD);
 
     if (id == 0) printf("After:\n");
     for (int i=0; i<numProcs; i++) {

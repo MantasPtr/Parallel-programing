@@ -59,8 +59,8 @@ void calculateMedian(int M, int oneBlockSize, int procCount, int* workMatrix, do
 int main(int argc, char* argv[]) {
     double startTime = GetTime();
     int id, procCount; 
-    int N = 16;
-    int M = 20;
+    int N = 256;
+    int M = 10000;
     int *Matrix = new int[N * M];
     double *median;
     MPI_Init(&argc, &argv);
@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
     if (id == 0) {
         printf("-------------------/n time: %.3f\n-------------------/n" , endTime - startTime);
     }
-    if (id == 0) {  
+    /*if (id == 0) {  
         for (int j=0; j< N;j++) {
             for (int i = 0; i < M; i++) {
                 printf("%3d ",Matrix[j*M+i]);            
@@ -98,6 +98,6 @@ int main(int argc, char* argv[]) {
         for (int i = 0; i < N; i++) {
             printf("%3.3f\n", median[i]);
         }
-    }
+    }*/
 
 }
