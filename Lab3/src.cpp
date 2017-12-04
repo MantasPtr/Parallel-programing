@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
     MPI_Finalize();
     double endTime = GetTime();
     if (id == 0) {
-        printf("-------------------/n time: %.3f\n-------------------/n" , endTime - startTime);
+        printf("-------------------\n time: %.3f\n-------------------\n" , endTime - startTime);
     }
     /*if (id == 0) {  
         for (int j=0; j< N;j++) {
