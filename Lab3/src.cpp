@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
         genMatrix(Matrix, N, M);
         median = new double[N];
     } else {
-        median = new double[N/blockCount];
+        median = new double[N/blockCount/procCount];
     }
     for (int i=0;i<blockCount;i++) {
         MPI_Scatter(Matrix+N*M/blockCount*i     ,M*oneBlockSize, MPI_INT, workMatrix, M*oneBlockSize, MPI_INT, 0, MPI_COMM_WORLD);
