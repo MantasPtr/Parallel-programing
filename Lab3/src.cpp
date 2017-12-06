@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
     int id, procCount; 
     int N = 256;
     int M = 10000;
-    int *Matrix = new int[N * M];
+    int *Matrix;
     double *median;
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &id);
@@ -69,11 +69,12 @@ int main(int argc, char* argv[]) {
     int *workMatrix = new int[N*M/procCount/blockCount];
     int oneBlockSize = N/procCount/blockCount;
     if (id == 0) {
+        Matrix = new int[N * M];
         srand(time(NULL));
         genMatrix(Matrix, N, M);
         median = new double[N];
     } else {
-        median = new double[N/blockCount/procCount];
+        median = new double[oneBlockSize];
     }
     for (int i=0;i<blockCount;i++) {
         MPI_Scatter(Matrix+N*M/blockCount*i     ,M*oneBlockSize, MPI_INT, workMatrix, M*oneBlockSize, MPI_INT, 0, MPI_COMM_WORLD);
