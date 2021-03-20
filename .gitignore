@@ -2,3 +2,6 @@
 gen
 program
 main
+*.sh
+*.png
+*.pgm
