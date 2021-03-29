@@ -9,7 +9,7 @@ cleanup:
 	rm -rf ./images/*
 
 compile:
-	g++ src.cpp -o program.sh
+	g++ src.cpp utils.cpp display_utils.cpp -o program.sh
 run:
 	./program.sh
 scale1:
