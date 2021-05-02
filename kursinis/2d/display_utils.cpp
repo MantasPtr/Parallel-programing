@@ -33,8 +33,8 @@ void write_matrix_to_file(double **matrix, int matrix_dimention, double max_valu
                 }
             }
         }
-        printf("MAX VALUE %.4f in %d %d\n", max_value, max_x, max_y);
     }
+    // pgm limitation, cannot be 0
     max_value = std::max(max_value, 0.00001);
 
     fprintf(imageFile, "P5\n");                          // P5 filetype

@@ -1,12 +1,10 @@
 default: full
 gcc: compile run
-mpi: mpi_compile mpi_run
 view: gif preview
 full: cleanup gcc view
-mpi_full: cleanup mpi view
+
 cleanup:
 	rm -rf ./images/*
-
 compile:
 	g++ src.cpp utils.cpp display_utils.cpp -o program.sh
 run:
@@ -17,10 +15,3 @@ gif:
 	convert -scale 1000x  -delay 10 -loop 0 images/*.pgm images/result.gif 
 preview:
 	eog images/result.gif
-
-
-
-mpi_compile:
-	mpic++ src_p.cpp utils.cpp display_utils.cpp -o p_program.sh
-mpi_run:
-	mpirun -n 2 ./p_program.sh
