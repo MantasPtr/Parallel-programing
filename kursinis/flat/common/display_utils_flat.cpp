@@ -54,13 +54,13 @@ void write_matrix_to_file(double *matrix, int matrix_dimention, double max_value
     fclose(imageFile);
 }
 
-void print_matrix(double *matrix, int matrix_dimention)
+void print_matrix(double *matrix, int matrix_dimention_y, int matrix_dimention_x)
 {
-    for (int i = 0; i < matrix_dimention; i++)
+    for (int j = 0; j < matrix_dimention_y; j++)
     {
-        for (int j = 0; j < matrix_dimention; j++)
+        for (int i = 0; i < matrix_dimention_x; i++)
         {
-            printf(" %.2f", matrix[i * matrix_dimention + j]);
+            printf(" %.2f", matrix[j * matrix_dimention_x + i]);
         }
         printf("\n");
     }
@@ -80,7 +80,7 @@ void save_to_file(double *matrix, int matrix_dimention, double max_value, int in
     char index_str[5];
     snprintf(index_str, 6, "%05d", index);
     char *filename = generate_filename(index_str);
-    printf("%s\n", filename);
+    // printf("Saved image to file %s\n", filename);
     write_matrix_to_file(matrix, matrix_dimention, matrix_dimention, filename, use_abs_value);
     free(filename);
 }

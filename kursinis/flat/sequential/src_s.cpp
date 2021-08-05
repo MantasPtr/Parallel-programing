@@ -6,10 +6,10 @@
 #include "../common/utils_flat.h"
 #include "../common/display_utils_flat.h"
 
-#define MATRIX_DIMENTION 100
+#define MATRIX_DIMENTION 10
 #define MAX_MATRIX_VALUE 1.0
-#define MAX_ITERATION_COUNT 10000
-#define INTERATION_DRAW_INTERVAL 50
+#define MAX_ITERATION_COUNT 300
+#define INTERATION_DRAW_INTERVAL 10
 #define USE_ABS_SCALE false
 
 double *termodynamics(double *matrix)
@@ -27,10 +27,10 @@ double *termodynamics(double *matrix)
             else
             {
                 next_matrix[i * MATRIX_DIMENTION + j] =
-                    (matrix[(i * MATRIX_DIMENTION - 1) + j - 1] +
-                     matrix[(i - 1) * MATRIX_DIMENTION + j + 1] +
-                     matrix[(i + 1) * MATRIX_DIMENTION + j - 1] +
-                     matrix[(i + 1) * MATRIX_DIMENTION + j + 1]) /
+                    (matrix[(i - 1) * MATRIX_DIMENTION + j] +
+                     matrix[(i + 1) * MATRIX_DIMENTION + j] +
+                     matrix[i * MATRIX_DIMENTION + j - 1] +
+                     matrix[i * MATRIX_DIMENTION + j + 1]) /
                     4;
             }
         }
