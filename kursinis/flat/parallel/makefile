@@ -23,3 +23,4 @@ mpi_run_4:
 debug: cleanup mpi
 	convert -scale 1000x  images/image_00001.pgm images/image2_00001.pgm
 	eog images/image2_00001.pgm
+
