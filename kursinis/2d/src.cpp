@@ -9,7 +9,7 @@
 #define MATRIX_DIMENTION 100
 #define MAX_MATRIX_VALUE 1.0
 #define MAX_ITERATION_COUNT 10000
-#define INTERATION_DRAW_INTERVAL 50
+#define DRAW_FREQUENCY 50
 #define USE_ABS_SCALE false
 
 double **termodynamics(double **matrix)
@@ -41,7 +41,7 @@ int main()
     for (int i = 1; i < MAX_ITERATION_COUNT; i++)
     {
         matrix = termodynamics(matrix);
-        if (i % INTERATION_DRAW_INTERVAL == 0)
+        if (i % DRAW_FREQUENCY == 0)
         {
             save_to_file(matrix, MATRIX_DIMENTION, MAX_MATRIX_VALUE, i, USE_ABS_SCALE);
         }

@@ -10,7 +10,7 @@
 #define MATRIX_DIMENTION 100
 #define MAX_MATRIX_VALUE 1.0
 #define MAX_ITERATION_COUNT 500
-#define INTERATION_DRAW_INTERVAL 1
+#define DRAW_FREQUENCY 10
 #define USE_ABS_SCALE false
 
 double *termodynamics(double *matrix, int dimention_x = MATRIX_DIMENTION, int dimention_y = MATRIX_DIMENTION)
@@ -57,14 +57,12 @@ int main(int argc, char *argv[])
     int block_row_count = work_row_count + 2;
     int send_blocksize = block_row_count * MATRIX_DIMENTION;
     int recv_blocksize = work_row_count * MATRIX_DIMENTION;
-    printf(" - Each thread will process %d rows \n - Each thread will receive %d rows \n - Each thread will receive %d numbers \n - Each thread will send back %d numbers \n", work_row_count, block_row_count, send_blocksize, recv_blocksize);
     double *work_matrix = new double[send_blocksize];
     if (id == 0)
     {
+        printf(" - Matrix dimention %d \n - Iteration count %d \n - Draw interval %d \n - Will generate %d images \n", MATRIX_DIMENTION, MAX_ITERATION_COUNT, DRAW_FREQUENCY, (DRAW_FREQUENCY == 0) ? 0 : (MAX_ITERATION_COUNT / DRAW_FREQUENCY));
+        printf(" - Each thread will process %d rows \n - Each thread will receive %d rows \n - Each thread will receive %d numbers \n - Each thread will send back %d numbers \n", work_row_count, block_row_count, send_blocksize, recv_blocksize);
         double *matrix = generate_matrix(MATRIX_DIMENTION, MAX_MATRIX_VALUE);
-        printf("initial matrix\n");
-        print_matrix(matrix, MATRIX_DIMENTION, MATRIX_DIMENTION);
-        printf("--------\n");
         // save inital value
         save_to_file(matrix, MATRIX_DIMENTION, MAX_MATRIX_VALUE, 0, USE_ABS_SCALE);
     }
@@ -147,7 +145,7 @@ int main(int argc, char *argv[])
                 MPI_COMM_WORLD);
         }
 
-        if (id == 0 && i % INTERATION_DRAW_INTERVAL == 0)
+        if (DRAW_FREQUENCY != 0 && id == 0 && i % DRAW_FREQUENCY == 0)
         {
             save_to_file(matrix, MATRIX_DIMENTION, MAX_MATRIX_VALUE, i, USE_ABS_SCALE);
         }
