@@ -20,7 +20,7 @@ jobs:
           path: kursinis/flat/sequential/program.sh
 
 
-    build-sequential:
+  build-parallel:
     runs-on: ubuntu-latest
     defaults:
       run:
