@@ -35,5 +35,5 @@ jobs:
       - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
-          name: sequential.sh
-          path: kursinis/flat/sequential/program.sh
+          name: parallel.sh
+          path: kursinis/flat/parallel/program.sh
