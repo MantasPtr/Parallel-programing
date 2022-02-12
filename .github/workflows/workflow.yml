@@ -13,12 +13,12 @@ jobs:
       - run: sudo apt-get install cmake 
       - run: cmake --version
       - run: gcc --version
-      - run: |
-          ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: make compile
+      - name: debugging info
+        run: ls
       - name: upload binary
         uses: actions/upload-artifact@v2
         with:
           name: binary file
-          path: program.sh
+          path: ./program.sh
