@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: sudo apt-get update
+      # - run: sudo apt-get update
       - run: sudo apt-get install cmake 
       - run: cmake --version
       - run: gcc --version
@@ -21,4 +21,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: binary file
-          path: ./program.sh
+          path: kursinis/flat/sequential/program.sh
