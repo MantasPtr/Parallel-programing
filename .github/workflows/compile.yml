@@ -18,3 +18,22 @@ jobs:
         with:
           name: sequential.sh
           path: kursinis/flat/sequential/program.sh
+
+
+    build-sequential:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kursinis/flat/parallel
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Install dependencies 
+        run: sudo apt-get install mpich 
+      - name: Compile
+        run: make mpi_compile
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: sequential.sh
+          path: kursinis/flat/sequential/program.sh
