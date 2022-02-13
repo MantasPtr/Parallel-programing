@@ -3,6 +3,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <mpi.h>
+#include <algorithm>
 
 #include "../common/utils_flat.h"
 #include "../common/display_utils_flat.h"
