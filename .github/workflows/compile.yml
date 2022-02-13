@@ -18,6 +18,7 @@ jobs:
         with:
           name: sequential.sh
           path: kursinis/flat/sequential/program.sh
+          if-no-files-found: error
 
 
   build-parallel:
@@ -37,3 +38,4 @@ jobs:
         with:
           name: parallel.sh
           path: kursinis/flat/parallel/program.sh
+          if-no-files-found: error
