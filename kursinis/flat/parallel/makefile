@@ -14,7 +14,7 @@ preview:
 	eog images/result.gif
 
 mpi_compile:
-	mpic++ src_p.cpp ../common/utils_flat.cpp ../common/display_utils_flat.cpp -o p_program.sh
+	mpic++ src_p.cpp ../common/utils_flat.cpp ../common/display_utils_flat.cpp -o program.sh
 mpi_run:
 	mpirun -n 2 ./p_program.sh
 mpi_run_4:
