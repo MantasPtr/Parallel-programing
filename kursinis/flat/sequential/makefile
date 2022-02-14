@@ -6,7 +6,7 @@ cleanup:
 	rm -rf ./images/*
 
 compile:
-	g++ src_s.cpp ../common/utils_flat.cpp ../common/display_utils_flat.cpp -o program.sh
+	g++ src_s.cpp ../common/utils_flat.cpp ../common/display_utils_flat.cpp ../common/config_reader.cpp ../lib/inih/cpp/INIReader.cpp ../lib/inih/ini.c -o program.sh
 run:
 	./program.sh
 scale1:
